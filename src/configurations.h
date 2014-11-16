@@ -3,7 +3,3 @@
 #define creator "Gjergj Ramku"
 #define fileLimit 7000
 #define defaultPort 8081
-
-//Drag and drop over app
-//Download resume
-//

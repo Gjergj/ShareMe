@@ -42,7 +42,7 @@ namespace http {
 		void connection::handle_read(const asio::error_code& e,
 			std::size_t bytes_transferred)
 		{
-			int totalWritenBytes = 0;
+			long int totalWritenBytes = 0;
 			if (!e)
 			{
 				request_.downloadResumeFileDownloadOffset = 0;
@@ -80,19 +80,19 @@ namespace http {
 								if (error)
 								{
 									std::cout << "Transferimi u nderpre." << std::endl;
-									std::cout << "Transferuar: " << (((float)totalWritenBytes / 1024) / 1024) << "MB" << std::endl;
+									std::cout << "Transferuar: " << (((long float)totalWritenBytes / 1024) / 1024) << "MB" << std::endl;
 									break;
 								}
 								totalWritenBytes += written;
 							}
-							std::cout << "Transferuar: " << (((float)totalWritenBytes / 1024) / 1024) << "MB" << std::endl;
+							std::cout << "Transferuar: " << (((long float)totalWritenBytes / 1024) / 1024) << "MB" << std::endl;
 							asio::error_code ignored_ec;
 							socket_.shutdown(asio::ip::tcp::socket::shutdown_both);
 						}
 						catch (std::exception ex)
 						{
 							std::cout << "Transferimi u nderpre." << std::endl;
-							std::cout << "Transferuar: " << (((float)totalWritenBytes / 1024) / 1024) << "MB" << std::endl;
+							std::cout << "Transferuar: " << (((long float)totalWritenBytes / 1024) / 1024) << "MB" << std::endl;
 							asio::error_code ignored_ec;
 							socket_.shutdown(asio::ip::tcp::socket::shutdown_both);
 						}
