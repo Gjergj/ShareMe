@@ -15,7 +15,6 @@
 #include <boost/lexical_cast.hpp>
 #include "server.hpp"
 
-
 #include <iostream>
 #include <windows.h>
 #include <winbase.h>

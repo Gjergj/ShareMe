@@ -42,7 +42,7 @@ namespace http {
 		void connection::handle_read(const asio::error_code& e,
 			std::size_t bytes_transferred)
 		{
-			long int totalWritenBytes = 0;
+			long float totalWritenBytes = 0;
 			if (!e)
 			{
 				request_.downloadResumeFileDownloadOffset = 0;
@@ -79,8 +79,7 @@ namespace http {
 								written = asio::write(socket_, asio::buffer(buf, read), error);
 								if (error)
 								{
-									std::cout << "Transferimi u nderpre." << std::endl;
-									std::cout << "Transferuar: " << (((long float)totalWritenBytes / 1024) / 1024) << "MB" << std::endl;
+									std::cout << "Transferimi u nderpre. Error" << error.value() << std::endl;
 									break;
 								}
 								totalWritenBytes += written;
