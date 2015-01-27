@@ -7,3 +7,5 @@
 *.tlog
 *.lastbuildstate
 *.ipch
+*.ilk
+/Else
