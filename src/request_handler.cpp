@@ -195,7 +195,7 @@ bool request_handler::createDownload(request& req, reply& rep)
 	
 	rep.isFileDownLoad = req.isFileDownload;
 	
-	rep.headers.resize(6);
+	rep.headers.resize(8);
 	if (req.downloadResume)
 	{
 		rep.status = reply::partial_content;

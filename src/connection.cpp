@@ -63,17 +63,20 @@ namespace http {
 							reply_ = reply::stock_reply(reply::not_found);
 						}
 						std::cout << "Duke u shkaruar:" << request_.fileFullPath << std::endl;
-						char buf[8192];
-						memset(buf, 0, sizeof(buf));
-						int read = 0;
+						
 
 						asio::error_code error;
 						try{
 							if (request_.downloadResume && (request_.downloadResumeFileDownloadOffset > 0))
 								is.seekg(request_.downloadResumeFileDownloadOffset);
+
+							char buf[1024];
+							memset(buf, 0, sizeof(buf));
+							int read = 0;
 							while ((read = is.read(buf, sizeof(buf)).gcount()) > 0)
 							{
 								written = asio::write(socket_, asio::buffer(buf, read), error);
+								memset(buf, 0, sizeof(buf));
 								if (error)
 								{
 									std::cout << "Transferimi u nderpre. Error" << error.value() << std::endl;
@@ -83,7 +86,7 @@ namespace http {
 							}
 							std::cout << "Transferuar: " << (((long float)totalWritenBytes / 1024) / 1024) << "MB" << std::endl;
 							asio::error_code ignored_ec;
-							socket_.shutdown(asio::ip::tcp::socket::shutdown_both);
+							socket_.shutdown(asio::ip::tcp::socket::shutdown_both, ignored_ec);
 						}
 						catch (std::exception ex)
 						{
