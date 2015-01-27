@@ -31,8 +31,6 @@ namespace http {
 		void connection::start()
 		{
 			std::cout << socket_.remote_endpoint().address().to_string() << std::endl;
-			//std::cout << socket_.remote_endpoint().port() << std::endl;
-
 			socket_.async_read_some(asio::buffer(buffer_),
 				boost::bind(&connection::handle_read, shared_from_this(),
 				asio::placeholders::error,
@@ -57,7 +55,6 @@ namespace http {
 					request_handler_.handle_request(request_, reply_);
 					if (reply_.isFileDownLoad)
 					{
-						//asio::write(socket_, reply_.to_buffers());
 						written = socket_.write_some(reply_.to_buffers());
 						
 						std::ifstream is(request_.fileFullPath.c_str(), std::ios::in | std::ios::binary );

@@ -87,34 +87,6 @@ void request_handler::handle_request(request& req, reply& rep)
 
   createIndex(req, rep); return;
 
-  //// Determine the file extension.
-  //std::size_t last_slash_pos = request_path.find_last_of("/");
-  //std::size_t last_dot_pos = request_path.find_last_of(".");
-  //std::string extension;
-  //if (last_dot_pos != std::string::npos && last_dot_pos > last_slash_pos)
-  //{
-  //  extension = request_path.substr(last_dot_pos + 1);
-  //}
-
-  //// Open the file to send back.
-  //std::string full_path = doc_root_ + request_path;
-  //std::ifstream is(full_path.c_str(), std::ios::in | std::ios::binary);
-  //if (!is)
-  //{
-  //  rep = reply::stock_reply(reply::not_found);
-  //  return;
-  //}
-
-  //// Fill out the reply to be sent to the client.
-  //rep.status = reply::ok;
-  //char buf[512];
-  //while (is.read(buf, sizeof(buf)).gcount() > 0)
-  //  rep.content.append(buf, is.gcount());
-  //rep.headers.resize(2);
-  //rep.headers[0].name = "Content-Length";
-  //rep.headers[0].value = boost::lexical_cast<std::string>(rep.content.size());
-  //rep.headers[1].name = "Content-Type";
-  //rep.headers[1].value = mime_types::extension_to_type(extension);
 }
 bool request_handler::createIndex(const request& req, reply& rep)
 {
@@ -144,19 +116,14 @@ bool request_handler::createIndex(const request& req, reply& rep)
 
 	rep.content += "<HTML> <HEAD> <TITLE>ShareMe</TITLE> </HEAD> <BODY>";
 
-
-	//std::string domain = "";
-	//for (std::vector<http::server2::header>::const_iterator iter = req.headers.begin(); iter != req.headers.end(); ++iter)
-	//	if (iter->name == "Host")
-	//		domain = iter->value;
 	std::string uri;
 	for (std::vector<boost::filesystem::path>::iterator iter = paths.begin(); iter != paths.end(); ++iter)
 	{
 		uri = iter->generic_string();
-		if (global::dragAndDropFileName.size() < 1)//perndyshe heq germen e pare (C)
+		if (global::dragAndDropFileName.size() < 1)//otherwise it will remove first letter (C)
 			uri.erase(0, currentPath.size() + 1);
 
-		rep.content += "<a href=\"" /*+ domain + "/"*/ + url_encode(uri) + "\">" + iter->filename().string() + "</a>  " + boost::lexical_cast<std::string> (((float)boost::filesystem::file_size(iter->string()) / 1024) / 1024) + "MB <br> ";
+		rep.content += "<a href=\""  + url_encode(uri) + "\">" + iter->filename().string() + "</a>  " + boost::lexical_cast<std::string> (((float)boost::filesystem::file_size(iter->string()) / 1024) / 1024) + "MB <br> ";
 	}
 	rep.content += "<br><br><br>ShareMe v" + std::string(version) + "<br>";
 	rep.content += creator;
@@ -165,9 +132,7 @@ bool request_handler::createIndex(const request& req, reply& rep)
 	rep.content += "<br>";
 	rep.content += "</BODY> </HTML>";
 	rep.status = reply::ok;
-	/*char buf[512];
-	while (is.read(buf, sizeof(buf)).gcount() > 0)
-		rep.content.append(buf, is.gcount());*/
+
 	rep.headers.resize(2);
 	rep.headers[0].name = "Content-Length";
 	rep.headers[0].value = boost::lexical_cast<std::string>(rep.content.size());
@@ -199,9 +164,7 @@ bool request_handler::createUploadHtml(request& req, reply& rep)
 	rep.content += "<br>";
 	rep.content += "</BODY> </HTML>";
 	rep.status = reply::ok;
-	/*char buf[512];
-	while (is.read(buf, sizeof(buf)).gcount() > 0)
-	rep.content.append(buf, is.gcount());*/
+
 	rep.headers.resize(2);
 	rep.headers[0].name = "Content-Length";
 	rep.headers[0].value = boost::lexical_cast<std::string>(rep.content.size());
@@ -216,17 +179,6 @@ bool request_handler::createDownload(request& req, reply& rep)
 	rep.content.clear();
 	rep.content = "";
 
-	/*std::ifstream is(req.fileFullPath.c_str(), std::ios::in | std::ios::binary);
-	if (!is)
-	{
-		rep = reply::stock_reply(reply::not_found);
-		return false;
-	}
-	char buf[512];
-	while (is.read(buf, sizeof(buf)).gcount() > 0)
-	rep.content.append(buf, is.gcount());*/
-	//std::vector<boost::filesystem::path>::iterator iter = paths.begin(); iter != paths.end(); ++iter
-	//std::vector<header> headers;
 	for (std::vector<header>::iterator tempStr = req.headers.begin() ; tempStr != req.headers.end(); ++tempStr)
 	{
 		if (tempStr->name == "Range")
