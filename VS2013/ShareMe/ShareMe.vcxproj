@@ -92,8 +92,8 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <IncludePath>D:\libs\boost_1_56_0_X32_VS2013;D:\libs\asio-1.10.2\include;$(IncludePath)</IncludePath>
     <LibraryPath>D:\libs\boost_1_56_0_X32_VS2013\lib32-msvc-12.0;$(LibraryPath)</LibraryPath>
-    <OutDir>../Else/$(Configuration)\</OutDir>
-    <IntDir>../Else/$(Configuration)\</IntDir>
+    <OutDir>..\Else\$(Configuration)\</OutDir>
+    <IntDir>..\Else\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <IncludePath>D:\libs\boost_1_56_0_X64_VS2013;D:\libs\asio-1.10.2\include;$(IncludePath)</IncludePath>
@@ -108,8 +108,8 @@
     <IntDir>../Else/$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <OutDir>../Else/$(Configuration)\</OutDir>
-    <IntDir>../Else/$(Configuration)\</IntDir>
+    <OutDir>..\Else\$(Configuration)\</OutDir>
+    <IntDir>..\Else\$(Configuration)\</IntDir>
     <IncludePath>D:\libs\boost_1_56_0_X32_VS2013;D:\libs\asio-1.10.2\include;$(IncludePath)</IncludePath>
     <LibraryPath>D:\libs\boost_1_56_0_X32_VS2013\lib32-msvc-12.0;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
@@ -123,7 +123,7 @@
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <OutputFile>$(OutDir)$(TargetName)007$(TargetExt)</OutputFile>
+      <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
       <Version>
       </Version>
     </Link>
@@ -153,7 +153,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <OutputFile>$(OutDir)$(TargetName)007$(TargetExt)</OutputFile>
+      <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">

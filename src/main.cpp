@@ -126,6 +126,9 @@ int CopyToClipBoard(std::string clipBoardContent)
 
 int main(int argc, char* argv[])
 {
+
+
+
 	std::cout << "--------------- Perdorimi ---------------------" << std::endl;
 	std::cout << "Nese hapet brenda nje direktorie programi automatikisht \n merr te gjitha file direktorise dhe nen direktorive.\n" << std::endl;
 	std::cout << "Nese mbi ikonen e programit behet drag/drop nje ose me shume file atehere\n programi merr vetem ato file\n" << std::endl;
@@ -184,6 +187,7 @@ int main(int argc, char* argv[])
   {
     std::cerr << "exception: " << e.what() << "\n";
   }
+  
 
   return 0;
 }
