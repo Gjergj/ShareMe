@@ -8,3 +8,5 @@
 *.lastbuildstate
 *.ipch
 *.ilk
+*.manifest
+*.cache
