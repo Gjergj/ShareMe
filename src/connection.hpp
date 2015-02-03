@@ -20,7 +20,7 @@
 #include "request.hpp"
 #include "request_handler.hpp"
 #include "request_parser.hpp"
-
+#define binaryBuffSize 8192
 namespace http {
 namespace server2 {
 
@@ -65,6 +65,8 @@ private:
 
   /// The reply to be sent back to the client.
   reply reply_;
+
+  char binaryBuf[binaryBuffSize];
 };
 
 typedef boost::shared_ptr<connection> connection_ptr;

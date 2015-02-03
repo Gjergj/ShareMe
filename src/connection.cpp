@@ -70,13 +70,12 @@ namespace http {
 							if (request_.downloadResume && (request_.downloadResumeFileDownloadOffset > 0))
 								is.seekg(request_.downloadResumeFileDownloadOffset);
 
-							char buf[1024];
-							memset(buf, 0, sizeof(buf));
+							memset(binaryBuf, 0, binaryBuffSize);
 							int read = 0;
-							while ((read = is.read(buf, sizeof(buf)).gcount()) > 0)
+							while ((read = is.read(binaryBuf, binaryBuffSize).gcount()) > 0)
 							{
-								written = asio::write(socket_, asio::buffer(buf, read), error);
-								memset(buf, 0, sizeof(buf));
+								written = asio::write(socket_, asio::buffer(binaryBuf, read), error);
+								memset(binaryBuf, 0, binaryBuffSize);
 								if (error)
 								{
 									std::cout << "Transferimi u nderpre. Error" << error.value() << std::endl;
