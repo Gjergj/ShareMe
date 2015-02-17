@@ -10,3 +10,5 @@
 *.ilk
 *.manifest
 *.cache
+*.pch
+*.map
